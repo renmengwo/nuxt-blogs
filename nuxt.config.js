@@ -1,4 +1,5 @@
-export default {
+// eslint-disable-next-line nuxt/no-cjs-in-config
+module.exports = {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'demos',
@@ -19,7 +20,8 @@ export default {
   css: [
     'iview/dist/styles/iview.css'
   ],
-
+  telemetry: false,
+  dev: process.env.NODE_ENV !== 'production',
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '@/plugins/iview'
@@ -33,7 +35,9 @@ export default {
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module'
   ],
-
+  server: {
+    port: 3334
+  },
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios

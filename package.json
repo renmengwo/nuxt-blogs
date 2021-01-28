@@ -3,18 +3,25 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
+    "dev": "cross-env NODE_ENV=dev nodemon  server.js --exec babel-node",
     "build": "nuxt build",
-    "start": "nuxt start",
+    "start": "cross-env NODE_ENV=production nodemon server.js",
     "generate": "nuxt generate",
     "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
     "lint": "npm run lint:js"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.12.5",
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
     "core-js": "^3.8.2",
+    "cross-env": "^7.0.3",
+    "express": "^4.17.1",
     "iview": "^3.5.4",
-    "nuxt": "^2.14.12"
+    "nodemon": "^2.0.7",
+    "nuxt": "^2.14.12",
+    "sequelize": "^6.5.0",
+    "mysql2": "^2.2.5"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^5.0.0",
