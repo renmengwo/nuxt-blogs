@@ -1,7 +1,14 @@
 <template>
   <div class="container">
     <div>
-      {{ip}}
+      <Button type="primary">
+        Primary
+      </Button>
+      <Select v-model="model1" style="width:200px">
+        <Option v-for="item in data" :key="item.id" :value="item.id">
+          {{ item.name }}
+        </Option>
+      </Select>
     </div>
   </div>
 </template>
@@ -9,13 +16,16 @@
 <script>
 export default {
   async asyncData ({ $axios }) {
-    const ip = await $axios.$get('/cate/getCateList')
-    return { ip }
+    const { data } = await $axios.$get('/cate/getCateList')
+    return { data }
   },
   data () {
     return {
-      single: ''
+      model1: ''
     }
+  },
+  methods: {
+
   }
 }
 </script>
@@ -23,7 +33,6 @@ export default {
 <style>
 .container {
   margin: 0 auto;
-  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -24,7 +24,7 @@ module.exports = {
   dev: process.env.NODE_ENV !== 'production',
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '@/plugins/iview'
+    { src: '~plugins/iview', ssr: true }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -48,6 +48,5 @@ module.exports = {
   axios: {},
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-  }
+  build: { }
 }

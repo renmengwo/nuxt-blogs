@@ -1,12 +1,12 @@
 <template>
-  <div>
-    13123
-  </div>
+    <div>
+      这是底部
+    </div>
 </template>
 
 <script>
 export default {
-  name: 'Page'
+  name: 'Footer'
 }
 </script>
 
