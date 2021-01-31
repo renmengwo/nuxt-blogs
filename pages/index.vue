@@ -5,7 +5,7 @@
         Primary
       </Button>
       <Select v-model="model1" style="width:200px">
-        <Option v-for="item in data" :key="item.id" :value="item.id">
+        <Option v-for="item in list" :key="item.id" :value="item.id">
           {{ item.name }}
         </Option>
       </Select>
@@ -14,19 +14,24 @@
 </template>
 
 <script>
+import { getCateList } from '../api/cate'
 export default {
-  async asyncData ({ $axios }) {
-    const { data } = await $axios.$get('/cate/getCateList')
-    return { data }
-  },
   data () {
     return {
-      model1: ''
+      model1: '',
+      list: []
     }
   },
+  mounted () {
+    // this.test()
+  },
   methods: {
-    test () {
-      this.$axios.$get('/cate/getCateList')
+    async test () {
+      const { data } = await getCateList()
+      if (data.status === 1) {
+        this.list = data.data
+      }
+      console.log(data)
     }
   }
 }

@@ -40,6 +40,9 @@ module.exports = {
   server: {
     port: process.env.NODE_ENV === 'dev' ? 3001 : 8080
   },
+  router: {
+    middleware: 'authenticated'
+  },
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios

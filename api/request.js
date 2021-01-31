@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Message } from 'iview'
+import { getToken } from '../assets/utils/Cookies'
 const service = axios.create({
   // baseURL: '/rcsapi',
   timeout: 3000
@@ -72,9 +73,9 @@ service.interceptors.request.use(
     config.headers = {
       'Content-Type': 'application/json;charset=utf-8' // 设置跨域头部
     };
-    /* if (getToken()) {
+    if (getToken()) {
       config.headers.Authorization = getToken();
-    } */
+    }
     return config;
   },
   (error) => {
@@ -85,7 +86,6 @@ service.interceptors.request.use(
 // Response interceptors
 service.interceptors.response.use(
   (response) => {
-    console.log(response)
     if (response.status !== 200) {
       statusHandle(response.status);
     } else if (response.data.status !== 1) {

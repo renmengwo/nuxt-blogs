@@ -42,7 +42,8 @@
 
 <script>
 import md5 from 'js-md5'
-import { Login, addUser } from '../api/user'
+import { mapActions } from 'vuex'
+import { addUser } from '../api/user'
 export default {
   name: 'Header',
   data () {
@@ -54,6 +55,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions('User', ['BlogLogin', 'BlogUserInfo']),
     Submite () {
       const body = {
         username: this.username,
@@ -69,13 +71,10 @@ export default {
         }
       })
     },
-    login (obj) {
-      Login(obj).then(({ data }) => {
-        if (data.status === 1) {
-          this.loginVisiale = false
-          this.$Message.success('登录成功');
-        }
-      })
+    async login (obj) {
+      await this.BlogLogin(obj)
+      await this.$Message.success('登录成功');
+      this.loginVisiale = false
     },
     LoginOrRegister () {
       this.flag = 0;

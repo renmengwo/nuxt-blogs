@@ -1,6 +1,8 @@
 const UserModel = require('../model/user')
 const Constant = require('../constant/index')
 const Common = require('../common/index')
+const Token = require('../../assets/utils/Token')
+const TOKEN_EXPIRE_SECOND = 3600 // 设置token的过期时间，单位为s
 function addUser (req, res) {
   const resObj = Common.clone(Constant.DEFAULT_SUCCESS('添加成功'))
   const { username, password } = req.body
@@ -39,7 +41,15 @@ function login (req, res) {
         }
       }).then(result => {
         if (result) {
-          console.log(result)
+          const adminInFo = {
+            id: result.id,
+            role: result.role
+          }
+          const token = Token.encrypt(adminInFo, TOKEN_EXPIRE_SECOND)
+          resObj.data = {
+            userId: result.id,
+            token
+          }
           callback(null)
         } else {
           callback(Constant.LOGIN_ERROR())
@@ -52,8 +62,34 @@ function login (req, res) {
   Common.autoFn(tasks, res, resObj)
 }
 
-function getUserInfo () {
-
+function getUserInfo (req, res) {
+  const resObj = Common.clone(Constant.DEFAULT_SUCCESS('查询成功'))
+  const { userId } = req.body
+  const tasks = {
+    checkParams: (callback) => {
+      Common.checkParams(req.body, ['userId'], callback)
+    },
+    query:['checkParams', (results, callback) => {
+      UserModel.findByPk({
+        where: {
+          id:userId
+        }
+      }).then(result => {
+        if (result) {
+          resObj.data = {
+            username:result.username,
+            userId: result.id,
+            role: result.role,
+            status: result.status
+          }
+          callback(null)
+        }
+      }).catch(error => {
+        callback(Constant.DEFAULT_ERROR(error.parent.sqlMessage))
+      })
+    }]
+  }
+  Common.autoFn(tasks, res, resObj)
 }
 
 const exoprtObj = {
