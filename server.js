@@ -1,10 +1,15 @@
 const { Nuxt, Builder } = require('nuxt')
+const bodyParser = require('body-parser')
 const app = require('express')()
-const port = process.env.PORT || 3334
+const port = process.env.PORT || 3001
 const indexRouter = require('./server/router/index')
 // We instantiate Nuxt.js with the options
 const config = require('./nuxt.config.js')
 const nuxt = new Nuxt(config)
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+// parse application/json
+app.use(bodyParser.json())
 app.use('/', indexRouter)
 app.use(nuxt.render)
 

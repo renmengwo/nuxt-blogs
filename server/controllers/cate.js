@@ -3,7 +3,7 @@ const Constant = require('../constant/index')
 const Common = require('../common/index')
 
 function getCateList (req, res) {
-  const resObj = Common.clone(Constant.DEFAULT_SUCCESS)
+  const resObj = Common.clone(Constant.DEFAULT_SUCCESS('操作成功'))
   const tasks = {
     checkParams: (callback) => {
       callback(null)
@@ -28,8 +28,7 @@ function getCateList (req, res) {
           callback(null)
         }
       }).catch((error) => {
-        console.log(error)
-        callback(Constant.DEFAULT_ERROR)
+        callback(Constant.DEFAULT_ERROR(error.parent.sqlMessage))
       })
     }]
   }

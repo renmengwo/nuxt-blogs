@@ -1,0 +1,36 @@
+@each $typekey, $type in $spacing-types {
+  @each $size in $space-sizes {
+    .#{$typekey}#{$size} {
+      #{$type}:#{$size}px
+    }
+  }
+
+  @each $directionskey, $direction in $spacing-directions{
+    @each $size in $space-sizes {
+      .#{$typekey}#{$directionskey}#{$size} {
+        #{$type}-#{$direction}:#{$size}px
+      }
+    }
+  }
+}
+
+//文章一行显示，多余省略号显示
+.title-item {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.d-flex{display: flex}
+
+@each $alignType, $align in $align-directions {
+  .align#{$alignType}{text-align: #{$align}}
+}
+.clearfix {
+  @include clearfix;
+}
+
+.fl{float:left;}
+.fr{float:right;}
+.ivu-layout{background:#fff;}
+.handlecursor{cursor:pointer}

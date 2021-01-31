@@ -24,7 +24,7 @@ const checkParams = (params, checkArr, callback) => {
   if (flag) {
     callback(null)
   } else {
-    callback(constant.LACK)
+    callback(constant.LACK('参数不正确'))
   }
 }
 
@@ -38,11 +38,10 @@ const autoFn = (tasks, res, resobj) => {
   async.auto(tasks, (err) => {
     if (err) {
       res.json({
-        status: err.status || constant.DEFAULT_ERROR.status,
+        status: err.status || constant.DEFAULT_ERROR().status,
         msg: err.msg || JSON.stringify(err)
       })
     } else {
-      console.log(resobj)
       res.json(resobj)
     }
   })

@@ -18,7 +18,9 @@ module.exports = {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    'iview/dist/styles/iview.css'
+    'iview/dist/styles/iview.css',
+    // 项目里要使用的 SCSS 文件
+    { src: '@/assets/scss/index.scss', lang: 'scss' }
   ],
   telemetry: false,
   dev: process.env.NODE_ENV !== 'production',
@@ -36,17 +38,34 @@ module.exports = {
     '@nuxtjs/eslint-module'
   ],
   server: {
-    port: 3334
+    port: process.env.NODE_ENV === 'dev' ? 3001 : 8080
   },
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    ['@nuxtjs/style-resources']
   ],
-
+  styleResources: {
+    scss: ['./assets/scss/_variables.scss', './assets/scss/_mixins.scss']
+  },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
-
+  axios: {
+    prefix: '/api', // 在请求路径前，加上 /app
+    proxy: true
+  },
+  proxy: {
+    '/api': {
+      target: 'http://127.0.0.1:3001', // 页面仍然显示 http://localhost:3000,但实际上是
+      pathRewrite: {
+        '^/api': '/',
+        changeOrigin: true
+      }
+    }
+  },
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: { }
+  build: {
+    devtools: true,
+    vendor: ['axios']
+  }
 }

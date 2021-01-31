@@ -1,0 +1,29 @@
+$align-directions:(
+  L: left,
+  C: center,
+  R: right
+);
+
+
+// space type
+$spacing-types: (
+  m: margin,
+  p: padding,
+);
+$spacing-directions: (
+  t: top,
+  r: right,
+  b: bottom,
+  l: left,
+);
+
+$space-sizes:(
+  5,
+  10,
+  15,
+  20,
+  25,
+  30,
+  35,
+  40
+);

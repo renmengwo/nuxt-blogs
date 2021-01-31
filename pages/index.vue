@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
+  <div class="container" style="height:2000px">
     <div>
-      <Button type="primary">
+      <Button type="primary" @click="test">
         Primary
       </Button>
       <Select v-model="model1" style="width:200px">
@@ -25,7 +25,9 @@ export default {
     }
   },
   methods: {
-
+    test () {
+      this.$axios.$get('/cate/getCateList')
+    }
   }
 }
 </script>
