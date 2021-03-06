@@ -1,5 +1,5 @@
-const jwt = require('jsonwebtoken')
-const tokenKey = 'UT0ZO#wZ7!@50rtK' // 设定一个密钥，用来加密解密Token
+const jwt = require('jsonwebtoken');
+const tokenKey = 'UT0ZO#wZ7!@50rtK'; // 设定一个密钥，用来加密解密Token
 
 const Token = {
   /*
@@ -9,7 +9,7 @@ const Token = {
   * @return {*} 返回一个Token
   * */
   encrypt (data, time) {
-    return jwt.sign(data, tokenKey, { expiresIn: time })
+    return jwt.sign(data, tokenKey, { expiresIn: time });
   },
   /*
   * Token 解密方法
@@ -19,19 +19,19 @@ const Token = {
   * */
   decrypt (token) {
     try {
-      const data = jwt.verify(token, tokenKey)
+      const data = jwt.verify(token, tokenKey);
       return {
         token: true,
         data
-      }
+      };
     } catch (e) {
       return {
         token: false,
         data: e
-      }
+      };
     }
   }
 
-}
+};
 
-module.exports = Token
+module.exports = Token;

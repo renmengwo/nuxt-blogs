@@ -1,13 +1,13 @@
-const { DataTypes } = require('sequelize')
-const db = require('../db/MySql')
-const CateModel = require('./cate')
+const { DataTypes } = require('sequelize');
+const db = require('../db/MySql');
+const CateModel = require('./cate');
 
 const Article = db.define('Article', {
   id: {
-    type:DataTypes.INTEGER,
-    allowNull :false,
+    type: DataTypes.INTEGER,
+    allowNull: false,
     autoIncrement: true,
-    primaryKey : true
+    primaryKey: true
   },
   title: {
     type: DataTypes.STRING,
@@ -21,17 +21,19 @@ const Article = db.define('Article', {
     type: DataTypes.INTEGER,
     allowNull: false
   },
-  author: {
-    type:DataTypes.STRING,
+  userId: {
+    type: DataTypes.INTEGER,
     allowNull: false
   }
 }, {
   underscored: true,
   tableName: 'article'
-})
+});
 
-module.exports = Article
+module.exports = Article;
+/*
 Article.belongsTo(CateModel, {
   foreignKey: 'cate',
   constraints: false
-})
+});
+*/

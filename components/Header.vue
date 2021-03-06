@@ -1,18 +1,22 @@
 <template>
   <Affix>
-    <header class="d-flex mb10 d-head pl30 pr30">
-      <div class="d-head-left">
-        这是logo位置
-      </div>
-      <div class="d-flex d-head-right">
-        <p class="admin-img mr20" />
-        <p class="mr20">
-          欢迎人猛我
-        </p>
-        <Button type="text" @click="LoginOrRegister">
-          请登录/注冊
-        </Button>
-      </div>
+    <header class=" mb10 d-head">
+      <section class="wrap d-flex d-head-center">
+        <ul class="d-head-left d-flex">
+          <li>这是logo位置</li>
+          <li>个人中心</li>
+          <li>热门动态</li>
+        </ul>
+        <div class="d-flex d-head-right">
+          <p class="admin-img mr20" />
+          <p class="mr20">
+            欢迎人猛我
+          </p>
+          <Button type="text" @click="LoginOrRegister">
+            请登录/注冊
+          </Button>
+        </div>
+      </section>
       <Modal
         v-model="loginVisiale"
         :scrollable="false"
@@ -41,9 +45,8 @@
 </template>
 
 <script>
-import md5 from 'js-md5'
-import { mapActions } from 'vuex'
-import { addUser } from '../api/user'
+import md5 from 'js-md5';
+import { addUser } from '../api/user';
 export default {
   name: 'Header',
   data () {
@@ -52,45 +55,52 @@ export default {
       username: '',
       password: '',
       flag: 0 // 0表示登录， 1表示注册
-    }
+    };
   },
   methods: {
-    ...mapActions('User', ['BlogLogin', 'BlogUserInfo']),
     Submite () {
       const body = {
         username: this.username,
         password: md5(this.password)
-      }
-      this.flag === 0 ? this.login(body) : this.register(body)
+      };
+      this.flag === 0 ? this.login(body) : this.register(body);
     },
     register (obj) {
       addUser(obj).then(({ data }) => {
         if (data.status === 1) {
-          this.loginVisiale = false
+          this.loginVisiale = false;
           this.$Message.success('注册成功');
         }
-      })
+      });
     },
-    async login (obj) {
-      await this.BlogLogin(obj)
-      await this.$Message.success('登录成功');
-      this.loginVisiale = false
+    async  login (obj) {
+      const data = await this.$store.dispatch('User/BlogLogin', obj);
+      if (data.status === 1) {
+        this.$Message.success('登录成功');
+        this.loginVisiale = false;
+        await this.$store.dispatch('User/BlogUserInfo');
+      }
     },
     LoginOrRegister () {
       this.flag = 0;
       this.username = '';
       this.password = '';
-      this.loginVisiale = true
+      this.loginVisiale = true;
     },
     handleResitor (flag) {
-      this.flag = flag
+      this.flag = flag;
     }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
-.d-head{border-bottom:1px solid #eaeaea;box-shadow: 0 5px 5px #f5f7f9; height:50px;flex-direction: row; justify-content: space-between;}
+.d-head{border-bottom:1px solid #eaeaea;box-shadow: 0 5px 5px #f5f7f9; height:50px;flex-direction: row; justify-content: space-between;background: #fff;}
 .admin-img{width:30px; height:30px;background: #f5f7f9;border-radius: 100%;border: 1px solid #000}
+.d-head-left{
+  li{margin-right:10px;cursor:pointer;line-height:50px;}
+}
 .d-head-right{align-items: center;}
+
+.d-head-center{flex-direction: row; justify-content: space-between;height:100%;}
 </style>

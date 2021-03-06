@@ -38,7 +38,7 @@ module.exports = {
     '@nuxtjs/eslint-module'
   ],
   server: {
-    port: process.env.NODE_ENV === 'dev' ? 3001 : 8080
+    port: process.env.NODE_ENV === 'dev' ? 3000 : 8080
   },
   router: {
     middleware: 'authenticated'
@@ -59,7 +59,7 @@ module.exports = {
   },
   proxy: {
     '/api': {
-      target: 'http://127.0.0.1:3001', // 页面仍然显示 http://localhost:3000,但实际上是
+      target: 'http://127.0.0.1:3000', // 页面仍然显示 http://localhost:3000,但实际上是
       pathRewrite: {
         '^/api': '/',
         changeOrigin: true
@@ -71,4 +71,4 @@ module.exports = {
     devtools: true,
     vendor: ['axios']
   }
-}
+};

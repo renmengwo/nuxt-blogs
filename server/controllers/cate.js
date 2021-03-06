@@ -1,12 +1,13 @@
-const CateModel = require('../model/cate')
-const Constant = require('../constant/index')
-const Common = require('../common/index')
+const CateModel = require('../model/cate');
+const Constant = require('../constant/index');
+const Common = require('../common/index');
 
+// 获取分类下拉列表
 function getCateList (req, res) {
-  const resObj = Common.clone(Constant.DEFAULT_SUCCESS('操作成功'))
+  const resObj = Common.clone(Constant.DEFAULT_SUCCESS('操作成功'));
   const tasks = {
     checkParams: (callback) => {
-      callback(null)
+      callback(null);
     },
     query: ['checkParams', (result, callback) => {
       CateModel.findAll({
@@ -15,27 +16,34 @@ function getCateList (req, res) {
         }
       }).then((result) => {
         if (result) {
-          const list = []
+          const list = [];
+
           result.forEach((item) => {
             const obj = {
               id: item.id,
               name: item.name,
               status: item.status
-            }
-            list.push(obj)
-          })
-          resObj.data = list
-          callback(null)
+            };
+            list.push(obj);
+          });
+          resObj.value = list;
+          callback(null);
         }
       }).catch((error) => {
-        callback(Constant.DEFAULT_ERROR(error.parent.sqlMessage))
-      })
+        console.log(error);
+        callback(Constant.DEFAULT_ERROR(error.parent.sqlMessage));
+      });
     }]
-  }
-  Common.autoFn(tasks, res, resObj)
+  };
+  Common.autoFn(tasks, res, resObj);
+}
+
+// 批量查询分类
+function batchCateList (req, res) {
+
 }
 const exportObj = {
   getCateList
-}
+};
 
-module.exports = exportObj
+module.exports = exportObj;

@@ -29,6 +29,22 @@ module.exports = {
     ],
     // 关闭语句强制分号结尾
     semi: [0],
+    'vue/html-indent': ['error', 2, {
+      attribute: 1,
+      baseIndent: 1,
+      closeBracket: 0,
+      alignAttributesVertically: true,
+      ignores: []
+    }],
+    'vue/html-self-closing': ['error', {
+      html: {
+        void: 'never',
+        normal: 'any',
+        component: 'any'
+      },
+      svg: 'always',
+      math: 'always'
+    }],
     // key值前面是否要有空格
     'key-spacing': [0, {
       singleLine: {
@@ -44,8 +60,6 @@ module.exports = {
       'no-multiple-empty-lines': [0, { max: 100 }],
       // 关闭禁止混用tab和空格
       'no-mixed-spaces-and-tabs': [0],
-      // 数组第一个指定是否启用这个规则，第二个指定几个空格
-      indent:[1, 2],
       'no-unused-vars':'off',
       'no-console':'off'
     }]

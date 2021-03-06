@@ -1,5 +1,5 @@
-const { Sequelize } = require('sequelize')
-const MYSQL_CONFIG = require('../config/db')
+const { Sequelize } = require('sequelize');
+const MYSQL_CONFIG = require('../config/db');
 
 const sequelize = new Sequelize(
   MYSQL_CONFIG.MYSQL.database,
@@ -16,6 +16,6 @@ const sequelize = new Sequelize(
     },
     timezone: '+08:00' // 时区设置
   }
-)
+);
 
-module.exports = sequelize
+module.exports = sequelize;

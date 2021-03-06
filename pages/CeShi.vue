@@ -1,12 +1,12 @@
 <template>
   <div>
-    这是底部
+    <p>ceshi</p>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Footer'
+  name: 'CeShi'
 };
 </script>
 

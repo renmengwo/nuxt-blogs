@@ -1,51 +1,127 @@
 <template>
-  <div class="container" style="height:2000px">
-    <div>
-      <Button type="primary" @click="test">
-        Primary
-      </Button>
-      <Select v-model="model1" style="width:200px">
-        <Option v-for="item in list" :key="item.id" :value="item.id">
-          {{ item.name }}
-        </Option>
-      </Select>
-    </div>
-  </div>
+  <section class="container">
+    <section class="d-banner">
+      这是banner图
+    </section>
+    <section class="wrap">
+      <Row>
+        <Col span="8">
+        <Col span="6" class-name="set-title">文章分类</Col>
+        <Col span="18">
+        <Select v-model="cate" placeholder="请选择" clearable>
+          <Option v-for="item in catelist" :key="item.id" :value="item.id">
+            {{ item.name }}
+          </Option>
+        </Select>
+        </Col>
+        </Col>
+        <Col span="8">
+        <Col span="6" class-name="set-title pl10">文章标题</Col>
+        <Col span="18">
+        <Input v-model="title" placeholder="请输入" clearable/>
+        </Col>
+        </Col>
+        <Col span="7" offset="1" class-name="alignL">
+        <Button type="primary" @click="getInitData">
+          搜索
+        </Button>
+        </Col>
+      </Row>
+      <section class="mt        `+ clearfix">
+        <div class="d-content-left fl">
+          <List item-layout="vertical">
+            <ListItem v-for="item in ArticleList" :key="item.id">
+              <ListItemMeta>
+                <template slot="title">
+                  <p class="handlecursor">
+                    {{ item.title }}
+                  </p>
+                </template>
+              </ListItemMeta>
+              <p>{{ item.content }}</p>
+              <template slot="action">
+                <li>
+                  作者：123
+                </li>
+                <li>
+                  发表时间：2020-02-02
+                </li>
+              </template>
+            </ListItem>
+          </List>
+          <template v-if="total">
+            <Page :total="total" :current="pageNumber" :page-size="20" @on-change="changePage" />
+          </template>
+        </div>
+        <div class="d-content-right fr">
+          <h4>本月热门</h4>
+          <ul>
+            <li></li>
+          </ul>
+        </div>
+      </section>
+    </section>
+  </section>
 </template>
 
 <script>
-import { getCateList } from '../api/cate'
+import { getCateList } from '@/api/cate';
+import { getArticleList } from '@/api/article';
 export default {
   data () {
     return {
-      model1: '',
-      list: []
-    }
+      cate: '',
+      title: '',
+      total: 0,
+      pageNumber: 1,
+      catelist: [],
+      ArticleList: []
+    };
   },
   mounted () {
-    // this.test()
+    this.getInitData();
+    this.SeachArticle();
   },
   methods: {
-    async test () {
-      const { data } = await getCateList()
+    async SeachArticle () {
+      const { data } = await getCateList();
       if (data.status === 1) {
-        this.list = data.data
+        this.catelist = data.value;
       }
-      console.log(data)
+    },
+    changePage (val) {
+      this.pageNumber = val;
+    },
+    async getInitData () {
+      const { data } = await getArticleList(this.doseach())
+      if (data.status === 1) {
+        this.ArticleList = data.value.list;
+        this.total = data.value.count
+      }
+    },
+    doseach () {
+      return {
+        title: this.title,
+        pageNumber: this.pageNumber,
+        cate: this.cate
+      }
     }
   }
-}
+};
 </script>
 
-<style>
+<style lang="scss" scoped>
 .container {
   margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  width:100%;
 }
-
+.d-banner{
+  width:100%;
+  min-width:1000px;
+  height:500px;
+}
+.d-content-left{width:770px}
+.d-content-right{width:200px}
 .title {
   font-family:
     'Quicksand',
@@ -63,7 +139,7 @@ export default {
   color: #35495e;
   letter-spacing: 1px;
 }
-
+.set-title{height:32px; line-height: 32px;}
 .subtitle {
   font-weight: 300;
   font-size: 42px;

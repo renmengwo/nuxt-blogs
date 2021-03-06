@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
 
 // User
-const tokenKey = 'rcsAccessToken';
+const tokenKey = 'AccessToken';
 export const getToken = () => Cookies.get(tokenKey);
 export const setToken = (token) => {
   const expires = new Date();

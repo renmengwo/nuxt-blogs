@@ -1,5 +1,5 @@
-const async = require('async')
-const constant = require('../constant/index')
+const async = require('async');
+const constant = require('../constant/index');
 
 /*
 * 克隆方法，克隆一个对象
@@ -7,8 +7,8 @@ const constant = require('../constant/index')
 * @returns {any}
 * */
 const clone = (obj) => {
-  return JSON.parse(JSON.stringify(obj))
-}
+  return JSON.parse(JSON.stringify(obj));
+};
 
 /*
 * 校验参数全局方法
@@ -17,16 +17,16 @@ const clone = (obj) => {
 * @returns callback 回调
 * */
 const checkParams = (params, checkArr, callback) => {
-  let flag = true
+  let flag = true;
   checkArr.forEach((item) => {
-    if (!params[item]) { flag = false }
-  })
+    if (!params[item]) { flag = false; }
+  });
   if (flag) {
-    callback(null)
+    callback(null);
   } else {
-    callback(constant.LACK('参数不正确'))
+    callback(constant.LACK('参数不正确'));
   }
-}
+};
 
 /*
 * 返回同一方法，返回JSON格式数据
@@ -40,17 +40,17 @@ const autoFn = (tasks, res, resobj) => {
       res.json({
         status: err.status || constant.DEFAULT_ERROR().status,
         msg: err.msg || JSON.stringify(err)
-      })
+      });
     } else {
-      res.json(resobj)
+      res.json(resobj);
     }
-  })
-}
+  });
+};
 
 const exportobj = {
   clone,
   checkParams,
   autoFn
-}
+};
 
-module.exports = exportobj
+module.exports = exportobj;

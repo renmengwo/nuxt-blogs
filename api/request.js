@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { Message } from 'iview'
-import { getToken } from '../assets/utils/Cookies'
+import { Message } from 'iview';
+import { getToken } from '../assets/utils/Cookies';
 const service = axios.create({
   // baseURL: '/rcsapi',
   timeout: 3000
@@ -9,7 +9,7 @@ function AlertMsg (type, content) {
   Message[type]({
     content,
     duration: 5
-  })
+  });
 }
 
 let num = 0;
@@ -29,7 +29,7 @@ function statusHandle (status) {
       break; */
     case 500:
       if (num < 1) {
-        AlertMsg('error', '服务正在启动中，请稍后。( ꒪Д꒪)ノ')
+        AlertMsg('error', '服务正在启动中，请稍后。( ꒪Д꒪)ノ');
       }
       num++;
       break;

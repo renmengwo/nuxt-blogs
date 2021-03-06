@@ -1,5 +1,5 @@
-const { DataTypes } = require('sequelize')
-const db = require('../db/MySql')
+const { DataTypes } = require('sequelize');
+const db = require('../db/MySql');
 
 const User = db.define('User', {
   id: {
@@ -29,5 +29,5 @@ const User = db.define('User', {
   timestamps: false,
   tableName: 'users', // MYSQL数据库表名
   underscored: true // 是否支持驼峰
-})
-module.exports = User
+});
+module.exports = User;

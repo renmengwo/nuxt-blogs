@@ -1,3 +1,13 @@
+html{color:#333;background:#fff;}
+body{font:12px/1.5 "Microsoft yahei",Tahoma,Arial,Helvetica,sans-serif;word-break:break-all;word-wrap:break-word;margin:0 auto}
+body,h1,h2,h3,h4,h5,h6,p,dl,dd,td,th{margin:0;padding:0;}ul,ol,input{margin:0;padding:0;}li{list-style: none;}
+img{border:none;vertical-align:middle;}
+table{border-collapse:collapse;border-spacing:0;}
+textarea{resize:none;}
+button,input,textarea{font-family:"Microsoft yahei",Tahoma,Arial,Helvetica,sans-serif;vertical-align:middle;}
+input:focus{outline:none;}
+a{color: #333; text-decoration: none;cursor: pointer;}
+
 @each $typekey, $type in $spacing-types {
   @each $size in $space-sizes {
     .#{$typekey}#{$size} {
@@ -34,3 +44,4 @@
 .fr{float:right;}
 .ivu-layout{background:#fff;}
 .handlecursor{cursor:pointer}
+.wrap{width:1000px;margin:0 auto;}
