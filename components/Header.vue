@@ -8,11 +8,13 @@
           <li>热门动态</li>
         </ul>
         <div class="d-flex d-head-right">
-          <p class="admin-img mr20" />
-          <p class="mr20">
-            欢迎人猛我
-          </p>
-          <Button type="text" @click="LoginOrRegister">
+          <template v-if="!isLogin">
+            <p class="admin-img mr20" />
+            <p class="mr20">
+              欢迎人猛我
+            </p>
+          </template>
+          <Button type="text" @click="LoginOrRegister" v-else>
             请登录/注冊
           </Button>
         </div>
@@ -30,7 +32,7 @@
         </div>
         <div>
           <Input v-model="password" placeholder="请输入密码" type="password" clearable prefix="md-create" />
-          <p v-if="flag === 1" class="mt10 handlecursor" @click="handleResitor(1)">
+          <p class="mt10 handlecursor" @click="handleResitor(1)">
             注册
           </p>
         </div>
@@ -46,7 +48,8 @@
 
 <script>
 import md5 from 'js-md5';
-import { addUser } from '../api/user';
+import { addUser } from '@/api/user';
+import { mapState } from 'vuex'
 export default {
   name: 'Header',
   data () {
@@ -56,6 +59,11 @@ export default {
       password: '',
       flag: 0 // 0表示登录， 1表示注册
     };
+  },
+  computed: {
+    ...mapState('User', {
+      isLogin: state => state.Token === ''
+    })
   },
   methods: {
     Submite () {
@@ -78,7 +86,7 @@ export default {
       if (data.status === 1) {
         this.$Message.success('登录成功');
         this.loginVisiale = false;
-        await this.$store.dispatch('User/BlogUserInfo');
+        // await this.$store.dispatch('User/BlogUserInfo');
       }
     },
     LoginOrRegister () {

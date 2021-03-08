@@ -1,23 +1,23 @@
-import { Login, GetUserInfo } from '@/api/user';
+import { Login } from '@/api/user';
 import { setToken } from 'assets/utils/Cookies';
 const state = () => ({
-  Token: '',
+  Token: ''/*,
   username: '',
   userId: '',
   status: '',
-  role: ''
+  role: '' */
 });
 
 const mutations = {
   SET_TOKEN (state, Token) {
     state.Token = Token;
-  },
+  }/*,
   SET_USERINFO (state, data) {
     state.username = data.username;
     state.userId = data.userId;
     state.status = data.status;
     state.role = data.role;
-  }
+  } */
 };
 
 const actions = {
@@ -28,16 +28,13 @@ const actions = {
       setToken(data.value.token);
     }
     return data;
-  },
+  }/*,
   async BlogUserInfo ({ commit }) {
     const { data } = await GetUserInfo();
     if (data.status === 1) {
       commit('SET_USERINFO', data.value);
     }
-  },
-  test ({ commit }) {
-    // const { data } = GetUserInfo();
-  }
+  } */
 };
 export default {
   namespace: true,

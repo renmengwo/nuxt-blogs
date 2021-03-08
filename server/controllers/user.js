@@ -47,7 +47,8 @@ function login (req, res) {
           };
           const token = Token.encrypt(adminInFo, TOKEN_EXPIRE_SECOND);
           resObj.value = {
-            userId: result.id,
+            // userId: result.id,
+            username: result.username,
             token
           };
           callback(null);
