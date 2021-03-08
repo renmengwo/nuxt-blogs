@@ -27,7 +27,7 @@
         </Button>
         </Col>
       </Row>
-      <section class="mt        `+ clearfix">
+      <section class="mt10 clearfix">
         <div class="d-content-left fl">
           <List item-layout="vertical">
             <ListItem v-for="item in ArticleList" :key="item.id">
@@ -41,10 +41,13 @@
               <p>{{ item.content }}</p>
               <template slot="action">
                 <li>
-                  作者：123
+                  作者：{{ item.userName }}
                 </li>
                 <li>
-                  发表时间：2020-02-02
+                  分类：{{ item.cateName }}
+                </li>
+                <li>
+                  发表时间：{{item.createdAt}}
                 </li>
               </template>
             </ListItem>

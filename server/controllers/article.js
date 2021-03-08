@@ -44,6 +44,7 @@ function getArticleList (req, res) {
             createAt: item.createAt,
             content: item.content,
             cate: item.cate,
+            createdAt: item.createdAt,
             userId: item.userId
             //  cateName: item.Cate.name
           };
