@@ -11,7 +11,7 @@
           <template v-if="!isLogin">
             <p class="admin-img mr20" />
             <p class="mr20">
-              欢迎人猛我
+              欢迎{{UserName}}
             </p>
           </template>
           <Button type="text" @click="LoginOrRegister" v-else>
@@ -62,7 +62,8 @@ export default {
   },
   computed: {
     ...mapState('User', {
-      isLogin: state => state.Token === ''
+      isLogin: state => state.Token === '',
+      UserName: state => state.username
     })
   },
   methods: {
@@ -86,7 +87,6 @@ export default {
       if (data.status === 1) {
         this.$Message.success('登录成功');
         this.loginVisiale = false;
-        // await this.$store.dispatch('User/BlogUserInfo');
       }
     },
     LoginOrRegister () {

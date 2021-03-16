@@ -5,9 +5,9 @@
     </section>
     <section class="wrap">
       <Row>
-        <Col span="8">
-        <Col span="6" class-name="set-title">文章分类</Col>
-        <Col span="18">
+        <Col span="8" />
+        <Col span="6" class-name="set-title" />文章分类</Col>
+        <Col span="18" />
         <Select v-model="cate" placeholder="请选择" clearable>
           <Option v-for="item in catelist" :key="item.id" :value="item.id">
             {{ item.name }}
@@ -15,13 +15,13 @@
         </Select>
         </Col>
         </Col>
-        <Col span="8">
-        <Col span="6" class-name="set-title pl10">文章标题</Col>
-        <Col span="18">
-        <Input v-model="title" placeholder="请输入" clearable/>
+        <Col span="8" />
+        <Col span="6" class-name="set-title pl10" />文章标题</Col>
+        <Col span="18" />
+        <Input v-model="title" placeholder="请输入" clearable />
         </Col>
         </Col>
-        <Col span="7" offset="1" class-name="alignL">
+        <Col span="7" offset="1" class-name="alignL" />
         <Button type="primary" @click="getInitData">
           搜索
         </Button>
@@ -29,29 +29,7 @@
       </Row>
       <section class="mt10 clearfix">
         <div class="d-content-left fl">
-          <List item-layout="vertical">
-            <ListItem v-for="item in ArticleList" :key="item.id">
-              <ListItemMeta>
-                <template slot="title">
-                  <p class="handlecursor">
-                    {{ item.title }}
-                  </p>
-                </template>
-              </ListItemMeta>
-              <p>{{ item.content }}</p>
-              <template slot="action">
-                <li>
-                  作者：{{ item.userName }}
-                </li>
-                <li>
-                  分类：{{ item.cateName }}
-                </li>
-                <li>
-                  发表时间：{{item.createdAt}}
-                </li>
-              </template>
-            </ListItem>
-          </List>
+          <ArticleList :article-list="ArticleList" />
           <template v-if="total">
             <Page :total="total" :current="pageNumber" :page-size="20" @on-change="changePage" />
           </template>
@@ -59,7 +37,7 @@
         <div class="d-content-right fr">
           <h4>本月热门</h4>
           <ul>
-            <li></li>
+            <li />
           </ul>
         </div>
       </section>
@@ -68,9 +46,13 @@
 </template>
 
 <script>
-import { getCateList } from '@/api/cate';
-import { getArticleList } from '@/api/article';
+import { getCateList } from '@/api/cate'
+import { getArticleList } from '@/api/article'
+import ArticleList from './compnents/ArticleList'
 export default {
+  components: {
+    ArticleList
+  },
   data () {
     return {
       cate: '',
@@ -79,26 +61,26 @@ export default {
       pageNumber: 1,
       catelist: [],
       ArticleList: []
-    };
+    }
   },
   mounted () {
-    this.getInitData();
-    this.SeachArticle();
+    this.getInitData()
+    this.SeachArticle()
   },
   methods: {
     async SeachArticle () {
-      const { data } = await getCateList();
+      const { data } = await getCateList()
       if (data.status === 1) {
-        this.catelist = data.value;
+        this.catelist = data.value
       }
     },
     changePage (val) {
-      this.pageNumber = val;
+      this.pageNumber = val
     },
     async getInitData () {
       const { data } = await getArticleList(this.doseach())
       if (data.status === 1) {
-        this.ArticleList = data.value.list;
+        this.ArticleList = data.value.list
         this.total = data.value.count
       }
     },
@@ -110,7 +92,7 @@ export default {
       }
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

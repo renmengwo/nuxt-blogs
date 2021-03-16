@@ -26,7 +26,7 @@ module.exports = {
   dev: process.env.NODE_ENV !== 'production',
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    { src: '~plugins/iview', ssr: true }
+    '~plugins/iview'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -35,7 +35,7 @@ module.exports = {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/eslint
-    '@nuxtjs/eslint-module'
+    // '@nuxtjs/eslint-module'
   ],
   server: {
     port: process.env.NODE_ENV === 'dev' ? 3000 : 8080
@@ -71,4 +71,4 @@ module.exports = {
     devtools: true,
     vendor: ['axios']
   }
-};
+}
