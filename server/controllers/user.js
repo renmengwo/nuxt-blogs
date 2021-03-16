@@ -65,7 +65,7 @@ function login (req, res) {
 
 function getUserInfo (req, res) {
   const resObj = Common.clone(Constant.DEFAULT_SUCCESS('查询成功'));
-  const authorization = req.headers.authorization;
+  const authorization = req.headers.cookie.split('=')[1]
   const { data } = Token.decrypt(authorization);
   const tasks = {
     checkParams: (callback) => {
