@@ -4,7 +4,7 @@
       <ListItem v-for="item in ArticleList" :key="item.id">
         <ListItemMeta>
           <template slot="title">
-            <p class="handlecursor">
+            <p class="handlecursor" @click="handleCheck(item.id)">
               {{ item.title }}
             </p>
           </template>
@@ -20,6 +20,14 @@
           <li>
             发表时间：{{ item.createdAt }}
           </li>
+          <template v-if="isPerson">
+            <li>
+              编辑
+            </li>
+            <li>
+              删除
+            </li>
+          </template>
         </template>
       </ListItem>
     </List>
@@ -33,6 +41,17 @@ export default {
     ArticleList: {
       type: Array,
       default: () => []
+    },
+    isPerson: {
+      type: Boolean,
+      default: false
+    }
+  },
+  methods: {
+    handleCheck(aritcleId) {
+      this.$router.push({
+        path: `/aritcle/${aritcleId}`
+      })
     }
   }
 }
