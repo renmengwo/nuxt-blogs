@@ -4,7 +4,7 @@
       这是banner图
     </section>
     <section class="wrap">
-      <i-row>
+      <i-col>
         <i-col span="8">
           <i-col span="6" class-name="set-title">
             文章分类
@@ -30,7 +30,7 @@
             搜索
           </i-button>
         </i-col>
-      </i-row>
+      </i-col>
       <section class="mt10 clearfix">
         <div class="d-content-left fl">
           <ArticleList :article-list="ArticleList" />
@@ -125,14 +125,14 @@ export default {
   display: block;
   font-weight: 300;
   font-size: 100px;
-  i-color: #35495e;
+  color: #35495e;
   letter-spacing: 1px;
 }
 .set-title{height:32px; line-height: 32px;}
 .subtitle {
   font-weight: 300;
   font-size: 42px;
-  i-color: #526488;
+  color: #526488;
   word-spacing: 5px;
   padding-bottom: 15px;
 }
