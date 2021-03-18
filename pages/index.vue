@@ -4,29 +4,33 @@
       这是banner图
     </section>
     <section class="wrap">
-      <Row>
-        <Col span="8" />
-        <Col span="6" class-name="set-title" />文章分类</Col>
-        <Col span="18" />
-        <Select v-model="cate" placeholder="请选择" clearable>
-          <Option v-for="item in catelist" :key="item.id" :value="item.id">
-            {{ item.name }}
-          </Option>
-        </Select>
-        </Col>
-        </Col>
-        <Col span="8" />
-        <Col span="6" class-name="set-title pl10" />文章标题</Col>
-        <Col span="18" />
-        <Input v-model="title" placeholder="请输入" clearable />
-        </Col>
-        </Col>
-        <Col span="7" offset="1" class-name="alignL" />
-        <Button type="primary" @click="getInitData">
-          搜索
-        </Button>
-        </Col>
-      </Row>
+      <i-row>
+        <i-col span="8">
+          <i-col span="6" class-name="set-title">
+            文章分类
+          </i-col>
+          <i-col span="18">
+            <i-select v-model="cate" placeholder="请选择" clearable>
+              <Option v-for="item in catelist" :key="item.id" :value="item.id">
+                {{ item.name }}
+              </Option>
+            </i-select>
+          </i-col>
+        </i-col>
+        <i-col span="8">
+          <i-col span="6" class-name="set-title pl10">
+            文章标题
+          </i-col>
+          <i-col span="18">
+            <i-input v-model="title" placeholder="请输入" clearable />
+          </i-col>
+        </i-col>
+        <i-col span="7" offset="1" class-name="alignL">
+          <i-button type="primary" @click="getInitData">
+            搜索
+          </i-button>
+        </i-col>
+      </i-row>
       <section class="mt10 clearfix">
         <div class="d-content-left fl">
           <ArticleList :article-list="ArticleList" />
@@ -121,14 +125,14 @@ export default {
   display: block;
   font-weight: 300;
   font-size: 100px;
-  color: #35495e;
+  i-color: #35495e;
   letter-spacing: 1px;
 }
 .set-title{height:32px; line-height: 32px;}
 .subtitle {
   font-weight: 300;
   font-size: 42px;
-  color: #526488;
+  i-color: #526488;
   word-spacing: 5px;
   padding-bottom: 15px;
 }

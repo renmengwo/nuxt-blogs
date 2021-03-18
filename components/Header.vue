@@ -11,12 +11,12 @@
           <template v-if="!isLogin">
             <p class="admin-img mr20" />
             <p class="mr20">
-              欢迎{{UserName}}
+              欢迎{{ UserName }}
             </p>
           </template>
-          <Button type="text" @click="LoginOrRegister" v-else>
+          <i-button v-else type="text" @click="LoginOrRegister">
             请登录/注冊
-          </Button>
+          </i-button>
         </div>
       </section>
       <Modal
@@ -28,18 +28,18 @@
           {{ flag === 0 ? '登录' : '注册' }}
         </p>
         <div class="mb15">
-          <Input v-model="username" placeholder="请输入账号" clearable prefix="md-contact" />
+          <i-input v-model="username" placeholder="请输入账号" clearable prefix="md-contact" />
         </div>
         <div>
-          <Input v-model="password" placeholder="请输入密码" type="password" clearable prefix="md-create" />
+          <i-input v-model="password" placeholder="请输入密码" type="password" clearable prefix="md-create" />
           <p class="mt10 handlecursor" @click="handleResitor(1)">
             注册
           </p>
         </div>
         <div slot="footer">
-          <Button type="primary" long @click="Submite">
+          <i-button type="primary" long @click="Submite">
             {{ flag === 0 ? '登录' : '注册' }}
-          </Button>
+          </i-button>
         </div>
       </Modal>
     </header>
