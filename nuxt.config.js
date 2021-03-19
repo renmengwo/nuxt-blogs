@@ -2,14 +2,15 @@
 module.exports = {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'demos',
+    title: '欢迎来到我的博客',
     htmlAttrs: {
       lang: 'en'
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' }
+      { hid: 'description', name: 'description', content: '这是个人学习博客' },
+      { hid: 'keywords', name: 'keywords', content: '博客' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -26,7 +27,8 @@ module.exports = {
   dev: process.env.NODE_ENV !== 'production',
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '~plugins/iview'
+    '~plugins/iview',
+    '~plugins/globalFilter'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

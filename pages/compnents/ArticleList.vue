@@ -4,9 +4,9 @@
       <ListItem v-for="item in ArticleList" :key="item.id">
         <ListItemMeta>
           <template slot="title">
-            <p class="handlecursor" @click="handleCheck(item.id)">
+            <nuxt-link :to="{name:'aritcle-id',params:{id:item.id}}" class="handlecursor">
               {{ item.title }}
-            </p>
+            </nuxt-link>
           </template>
         </ListItemMeta>
         <p>{{ item.content }}</p>
@@ -18,7 +18,7 @@
             分类：{{ item.cateName }}
           </li>
           <li>
-            发表时间：{{ item.createdAt }}
+            发表时间：{{ item.createdAt | formatimes('yyyy/MM/dd hh:mm:ss') }}
           </li>
           <template v-if="isPerson">
             <li>

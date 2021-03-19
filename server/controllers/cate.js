@@ -38,10 +38,6 @@ function getCateList (req, res) {
   Common.autoFn(tasks, res, resObj);
 }
 
-// 批量查询分类
-function batchCateList (req, res) {
-
-}
 const exportObj = {
   getCateList
 };

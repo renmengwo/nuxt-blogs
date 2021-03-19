@@ -3,5 +3,6 @@ const router = new express.Router();
 const ArticleModeRouter = require('../controllers/article');
 router.get('/getArticleList', ArticleModeRouter.getArticleList);
 router.get('/queryUserArticle', ArticleModeRouter.queryUserArticle);
+router.get('/queryArticleDetails', ArticleModeRouter.getArticleInfo);
 
 module.exports = router;

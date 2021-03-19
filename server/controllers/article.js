@@ -6,6 +6,7 @@ const CateModel = require('../model/cate');
 const UserModel = require('../model/user');
 const Token = require('../../assets/utils/Token');
 
+// 获取文章列表公共方法
 function PublicQueryList(whereCondition, pageNumber, pageSize, list, resObj) {
   const QueryList = {
     query:['checkParams', (result, callback) => {
@@ -201,7 +202,58 @@ function updateArticle (req, res) {
 
 // 获取文章详情
 function getArticleInfo (req, res) {
-
+  const resObj = Common.clone(Constant.DEFAULT_SUCCESS('操作成功'));
+  const { id } = req.query;
+  const tasks = {
+    checkParams: (callback) => {
+      Common.checkParams(req.query, ['id'], callback);
+    },
+    query: ['checkParams', (result, callback) => {
+      ArticleModel.findByPk(id).then(res => {
+        if (res) {
+          resObj.value = {
+            id: res.id,
+            title: res.title,
+            content: res.content,
+            userId: res.userId,
+            cateId: res.cate,
+            createdAt: res.createdAt,
+            updatedAt: res.updatedAt
+          }
+        }
+        const body = {
+          userId: res.userId,
+          cateId: res.cate
+        }
+        callback(null, body);
+      }).catch(error => {
+        callback(Constant.DEFAULT_ERROR(error));
+      })
+    }],
+    getAritcleUser: ['query', (results, callback) => {
+      const { userId } = results.query;
+      UserModel.findByPk(userId).then(res => {
+        if (res) {
+          resObj.value.username = res.username
+          callback(null);
+        }
+      }).catch(error => {
+        callback(Constant.DEFAULT_ERROR(error));
+      })
+    }],
+    getAritcleCate: ['query', (results, callback) => {
+      const { cateId } = results.query;
+      CateModel.findByPk(cateId).then(res => {
+        if (res) {
+          resObj.value.catename = res.name
+          callback(null);
+        }
+      }).catch(error => {
+        callback(Constant.DEFAULT_ERROR(error));
+      })
+    }]
+  };
+  Common.autoFn(tasks, res, resObj);
 }
 
 // 查询用户文章列表
