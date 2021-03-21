@@ -56,12 +56,12 @@ module.exports = {
   },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    prefix: '/api', // 在请求路径前，加上 /app
+    prefix: '/api', // 在请求路径前，加上 /api
     proxy: true
   },
   proxy: {
     '/api': {
-      target: 'http://127.0.0.1:3000', // 页面仍然显示 http://localhost:3000,但实际上是
+      target: 'http://localhost:3000', // 页面仍然显示 http://localhost:3000,但实际上是
       pathRewrite: {
         '^/api': '/',
         changeOrigin: true

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { Message } from 'iview';
-import { getToken } from '../assets/utils/Cookies';
+import { getToken } from 'assets/utils/Cookies';
+
 const service = axios.create({
   baseURL: '/api',
   timeout: 3000
