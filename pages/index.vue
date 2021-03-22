@@ -1,7 +1,14 @@
 <template>
   <section class="container">
-    <section class="d-banner">
-      这是banner图
+    <section class="d-banner my-swiper">
+      <div v-swiper:mySwiper="swiperOption">
+        <div class="swiper-wrapper">
+          <div v-for="(item, index) in banners" :key="index" class="swiper-slide">
+            <img :src="item.url" alt="" width="100%" height="100%">
+          </div>
+        </div>
+        <div class="swiper-pagination swiper-pagination-bullets"></div>
+      </div>
     </section>
     <section class="wrap">
       <i-col>
@@ -64,7 +71,23 @@ export default {
       total: 0,
       pageNumber: 1,
       catelist: [],
-      ArticleList: []
+      ArticleList: [],
+      banners: [{ url:'../static/images/backimg.jpg' }, { url:'../static/images/backimg.jpg' }],
+      swiperOption: {
+        speed: 400,
+        autoplay: true,
+        delay: 2000,
+        observer: true,
+        observerParent: true,
+        observeSlideChildren: true,
+        direction: 'horizontal',
+        paginationClickable: true,
+        autoplayDisableOnInteraction: true,
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true
+        }
+      }
     }
   },
   mounted () {
@@ -139,5 +162,26 @@ export default {
 
 .links {
   padding-top: 15px;
+}
+
+.my-swiper {
+  height: 300px;
+  width: 100%;
+  .swiper-slide {
+    text-align: center;
+    font-size: 38px;
+    font-weight: 700;
+    background-color: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  .swiper-container{height:100%}
+  .swiper-pagination {
+    > .swiper-pagination-bullet {
+      background-color: red;
+    }
+  }
 }
 </style>

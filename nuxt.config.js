@@ -20,6 +20,7 @@ module.exports = {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     'iview/dist/styles/iview.css',
+    'swiper/css/swiper.css',
     // 项目里要使用的 SCSS 文件
     { src: '@/assets/scss/index.scss', lang: 'scss' }
   ],
@@ -28,6 +29,7 @@ module.exports = {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~plugins/iview',
+    '~plugins/Swiper',
     '~plugins/globalFilter'
   ],
 

@@ -11,7 +11,7 @@
 import { getUseArticleList } from '@/api/article'
 import ArticleList from './compnents/ArticleList'
 export default {
-  name: 'PersonCenter',
+  name: 'UserCenter',
   components: { ArticleList },
   data() {
     return {

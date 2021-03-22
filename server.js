@@ -1,3 +1,5 @@
+const path = require('path');
+const express = require('express');
 const { Nuxt, Builder } = require('nuxt');
 const bodyParser = require('body-parser');
 const app = require('express')();
@@ -10,6 +12,7 @@ const nuxt = new Nuxt(config);
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
+app.use('/static', express.static(path.join(__dirname, 'static')));
 app.use('/', indexRouter);
 app.use(nuxt.render);
 
