@@ -12,5 +12,6 @@ router.get('/queryUserArticle', verifyMiddleware.verifyToken, ArticleModeRouter.
 router.get('/queryArticleDetails', ArticleModeRouter.getArticleInfo);
 router.post('/addArticle', verifyMiddleware.verifyToken, ArticleModeRouter.addArticle);
 router.post('/updateArticle', verifyMiddleware.verifyToken, ArticleModeRouter.updateArticle);
+router.post('/setDisabledArticle', verifyMiddleware.verifyToken, ArticleModeRouter.setDisabledArticle);
 
 module.exports = router;

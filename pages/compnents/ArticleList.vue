@@ -22,11 +22,11 @@
           </li>
           <template v-if="isPerson">
             <li>
-              <nuxt-link :to="{name:'aritcle-editeAritcle',query:{id:item.id}}" class="handlecursor">
+              <nuxt-link :to="{name:'aritcle-editeAritcle',query:{id:item.id}}" class="handlecursor handlecolor">
                 编辑
               </nuxt-link>
             </li>
-            <li>
+            <li @click="handleDisabled(item.id)">
               删除
             </li>
           </template>
@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import { setDisabledArticle } from '@/api/article'
 export default {
   name: 'ArticleList',
   props: {
@@ -49,11 +50,44 @@ export default {
       default: false
     }
   },
+  data () {
+    return {
+    }
+  },
   methods: {
+    handleDisabled(id) {
+      this.$Modal.confirm({
+        title: '提示',
+        okText: '确定',
+        cancelText: '取消',
+        content: '确定删除该条博客吗？',
+        onOk: () => {
+          this.Submite(id)
+        },
+        onCancel: () => {
+        }
+      });
+    },
+    async Submite(id) {
+      const body = {
+        status: 0,
+        id
+      }
+      const { data } = await setDisabledArticle(body);
+      if (data.status === 1) {
+        this.$Message.success({
+          content: '删除成功！',
+          duration: 1,
+          onClose: () => {
+            this.$emit('handleSuccess')
+          }
+        });
+      }
+    }
   }
 }
 </script>
 
 <style scoped>
-
+.handlecolor{color:#000; opacity:0.45}
 </style>

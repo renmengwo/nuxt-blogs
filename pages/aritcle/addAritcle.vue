@@ -45,6 +45,7 @@ import { getCateList } from '@/api/cate'
 import { addArticle } from '@/api/article'
 export default {
   name: 'AddAritcle',
+  middleware: 'userAuth',
   data () {
     return {
       title:'',

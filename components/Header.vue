@@ -4,8 +4,11 @@
       <section class="wrap d-flex d-head-center">
         <ul class="d-head-left d-flex">
           <li>这是logo位置</li>
-          <li>个人中心</li>
-          <li>热门动态</li>
+          <li>
+            <nuxt-link :to="{name:'UserCenter'}" class="handlecursor">
+              个人中心
+            </nuxt-link>
+          </li>
         </ul>
         <div class="d-flex d-head-right">
           <template v-if="!isLogin">
@@ -77,8 +80,8 @@ export default {
     register (obj) {
       addUser(obj).then(({ data }) => {
         if (data.status === 1) {
-          this.loginVisiale = false;
           this.$Message.success('注册成功');
+          this.loginVisiale = false;
         }
       });
     },

@@ -19,7 +19,7 @@ const clone = (obj) => {
 const checkParams = (params, checkArr, callback) => {
   let flag = true;
   checkArr.forEach((item) => {
-    if (!params[item]) { flag = false; }
+    if (typeof params[item] === 'undefined') { flag = false; }
   });
   if (flag) {
     callback(null);

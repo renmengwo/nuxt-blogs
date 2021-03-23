@@ -46,6 +46,7 @@ import { updateArticle, queryArticleDetails } from '@/api/article'
 
 export default {
   name: 'EditeAritcle',
+  middleware: 'userAuth',
   data () {
     return {
       ContentObj: {},

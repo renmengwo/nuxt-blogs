@@ -11,7 +11,7 @@
         </p>
       </div>
     </section>
-    <ArticleList :article-list="ArticleList" :is-person="isPerson" />
+    <ArticleList :article-list="ArticleList" :is-person="isPerson" @handleSuccess="getUseList" />
     <template v-if="total">
       <Page :total="total" :current="pageNumber" :page-size="20" @on-change="changePage" />
     </template>
@@ -25,6 +25,7 @@ import ArticleList from './compnents/ArticleList'
 export default {
   name: 'UserCenter',
   components: { ArticleList },
+  middleware: 'userAuth',
   data() {
     return {
       total: 0,
@@ -49,6 +50,7 @@ export default {
       }
     },
     async getUseList() {
+      this.pageNumber = 1;
       const { data } = await getUseArticleList(this.doseach());
       if (data.status === 1) {
         this.ArticleList = data.value.list
@@ -56,6 +58,7 @@ export default {
       }
     },
     changePage (val) {
+      this.pageNumber = 1;
       this.pageNumber = val
     }
   }

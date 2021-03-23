@@ -96,9 +96,11 @@ export default {
       }
     },
     changePage (val) {
+      this.pageNumber = 1;
       this.pageNumber = val
     },
     async getInitData () {
+      this.pageNumber = 1;
       const { data } = await getArticleList(this.doseach())
       if (data.status === 1) {
         this.ArticleList = data.value.list

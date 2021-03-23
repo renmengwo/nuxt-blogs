@@ -325,11 +325,40 @@ function queryUserArticle (req, res) {
   Common.autoFn(tasks, res, resObj);
 }
 
+// 删除文章（启用禁用）
+function setDisabledArticle (req, res) {
+  const resObj = Common.clone(Constant.DEFAULT_SUCCESS('操作成功'));
+  const { status, id } = req.body;
+  const tasks = {
+    checkParams: (callback) => {
+      Common.checkParams(req.body, ['status', 'id'], callback);
+    },
+    query: ['checkParams', (result, callback) => {
+      ArticleModel.update({
+        status,
+        updated_at: Math.round(new Date() / 1000)
+      }, {
+        where: {
+          id
+        }
+      }).then(res => {
+        if (res[0]) {
+          callback(null)
+        }
+      }).catch(error => {
+        callback(Constant.DEFAULT_ERROR(error));
+      })
+    }]
+  }
+  Common.autoFn(tasks, res, resObj);
+}
+
 const exportObj = {
   getArticleList,
   addArticle,
   getArticleInfo,
   queryUserArticle,
+  setDisabledArticle,
   updateArticle
 };
 

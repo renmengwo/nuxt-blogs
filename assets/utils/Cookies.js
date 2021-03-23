@@ -5,7 +5,7 @@ const tokenKey = 'AccessToken';
 export const getToken = () => Cookies.get(tokenKey);
 export const setToken = (token) => {
   const expires = new Date();
-  expires.setHours(expires.getHours() + 5);
+  expires.setHours(expires.getHours() + 1);
   if (token) {
     Cookies.set(tokenKey, token, { expires });
   } else {
