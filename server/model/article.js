@@ -1,6 +1,5 @@
 const { DataTypes } = require('sequelize');
 const db = require('../db/MySql');
-const CateModel = require('./cate');
 
 const Article = db.define('Article', {
   id: {
@@ -24,8 +23,21 @@ const Article = db.define('Article', {
   userId: {
     type: DataTypes.INTEGER,
     allowNull: false
+  },
+  status: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+  created_at: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  updated_at: {
+    type: DataTypes.STRING,
+    allowNull: false
   }
 }, {
+  timestamps: false,
   underscored: true,
   tableName: 'article'
 });

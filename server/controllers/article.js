@@ -23,10 +23,9 @@ function PublicQueryList(whereCondition, pageNumber, pageSize, list, resObj) {
             id: item.id,
             title: item.title,
             status: item.status,
-            createAt: item.createAt,
-            content: item.content,
+            content: item.content.replace(/<[^>]+>/g, ''), // 去掉所有的html标记,
             cate: item.cate,
-            createdAt: item.createdAt,
+            createdAt: item.created_at,
             userId: item.userId
             //  cateName: item.Cate.name
           };
@@ -192,7 +191,31 @@ function getArticleList (req, res) {
 
 // 添加文章
 function addArticle (req, res) {
-
+  const resObj = Common.clone(Constant.DEFAULT_SUCCESS('操作成功'));
+  const { title, content, cateId } = req.body;
+  const authorization = req.headers.cookie.split('=')[1];
+  const { data } = Token.decrypt(authorization);
+  const tasks = {
+    checkParams: (callback) => {
+      Common.checkParams(req.body, ['title', 'content', 'cateId'], callback);
+    },
+    query: ['checkParams', (result, callback) => {
+      ArticleModel.create({
+        title,
+        content,
+        cate: cateId,
+        userId: data.id,
+        status : 1,
+        updated_at: '',
+        created_at: Math.round(new Date() / 1000)
+      }).then(res => {
+        callback(null)
+      }).catch(error => {
+        callback(Constant.DEFAULT_ERROR(error));
+      })
+    }]
+  }
+  Common.autoFn(tasks, res, resObj);
 }
 
 // 更新文章
@@ -217,8 +240,8 @@ function getArticleInfo (req, res) {
             content: res.content,
             userId: res.userId,
             cateId: res.cate,
-            createdAt: res.createdAt,
-            updatedAt: res.updatedAt
+            createdAt: res.created_at,
+            updatedAt: res.updated_at ? res.updated_at : ''
           }
         }
         const body = {
@@ -260,7 +283,7 @@ function getArticleInfo (req, res) {
 function queryUserArticle (req, res) {
   const resObj = Common.clone(Constant.DEFAULT_SUCCESS('操作成功'));
   const authorization = req.headers.cookie.split('=')[1];
-  const { data } = Token.decrypt(authorization)
+  const { data } = Token.decrypt(authorization);
   const { pageNumber, pageSize } = req.query;
   const list = [];
   const whereCondition = {

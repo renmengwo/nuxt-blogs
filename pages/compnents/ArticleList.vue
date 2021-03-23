@@ -9,7 +9,7 @@
             </nuxt-link>
           </template>
         </ListItemMeta>
-        <p>{{ item.content }}</p>
+        <p v-html="item.content"></p>
         <template slot="action">
           <li>
             作者：{{ item.userName }}

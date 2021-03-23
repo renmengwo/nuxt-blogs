@@ -4,12 +4,12 @@
       {{ ContentObj.title }}
     </h4>
     <div class="d-cont-box">
-      {{ ContentObj.content }}
+      <div v-html="ContentObj.content"></div>
     </div>
     <p class="d-span-box">
       <span>作者：{{ ContentObj.username }}</span>|
       <span>分类：{{ ContentObj.catename }}</span>|
-      <span>最后更新时间：{{ ContentObj.updatedAt | formatimes('yyyy/MM/dd hh:mm:ss') }}</span>|
+      <span v-if="ContentObj.updatedAt !== ''">最后更新时间：{{ ContentObj.updatedAt | formatimes('yyyy/MM/dd hh:mm:ss') }} |</span>
       <span>添加时间：{{ ContentObj.createdAt | formatimes('yyyy/MM/dd hh:mm:ss') }}</span>
     </p>
   </div>

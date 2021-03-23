@@ -21,16 +21,21 @@ module.exports = {
   css: [
     'iview/dist/styles/iview.css',
     'swiper/css/swiper.css',
+    'quill/dist/quill.snow.css',
+    'quill/dist/quill.bubble.css',
+    'quill/dist/quill.core.css',
     // 项目里要使用的 SCSS 文件
     { src: '@/assets/scss/index.scss', lang: 'scss' }
   ],
   telemetry: false,
   dev: process.env.NODE_ENV !== 'production',
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-    '~plugins/iview',
-    '~plugins/Swiper',
-    '~plugins/globalFilter'
+  plugins: [{
+    src: '~plugins/vue-quill-editor', ssr: false
+  },
+  '~plugins/iview',
+  '~plugins/Swiper',
+  '~plugins/globalFilter'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

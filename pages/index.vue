@@ -151,7 +151,7 @@ export default {
   color: #35495e;
   letter-spacing: 1px;
 }
-.set-title{height:32px; line-height: 32px;}
+
 .subtitle {
   font-weight: 300;
   font-size: 42px;
