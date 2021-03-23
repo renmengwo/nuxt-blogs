@@ -30,11 +30,11 @@ const Article = db.define('Article', {
   },
   created_at: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: true
   },
   updated_at: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: true
   }
 }, {
   timestamps: false,

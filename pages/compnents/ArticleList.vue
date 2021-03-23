@@ -22,7 +22,9 @@
           </li>
           <template v-if="isPerson">
             <li>
-              编辑
+              <nuxt-link :to="{name:'aritcle-editeAritcle',query:{id:item.id}}" class="handlecursor">
+                编辑
+              </nuxt-link>
             </li>
             <li>
               删除
@@ -48,11 +50,6 @@ export default {
     }
   },
   methods: {
-    handleCheck(aritcleId) {
-      this.$router.push({
-        path: `/aritcle/${aritcleId}`
-      })
-    }
   }
 }
 </script>

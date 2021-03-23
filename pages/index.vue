@@ -10,8 +10,8 @@
         <div class="swiper-pagination swiper-pagination-bullets"></div>
       </div>
     </section>
-    <section class="wrap">
-      <i-col>
+    <section class="wrap clearfix">
+      <i-col class-name="clearfix mb20 mt20">
         <i-col span="8">
           <i-col span="6" class-name="set-title">
             文章分类
@@ -39,17 +39,11 @@
         </i-col>
       </i-col>
       <section class="mt10 clearfix">
-        <div class="d-content-left fl">
+        <div class="d-content-left">
           <ArticleList :article-list="ArticleList" />
           <template v-if="total">
             <Page :total="total" :current="pageNumber" :page-size="20" @on-change="changePage" />
           </template>
-        </div>
-        <div class="d-content-right fr">
-          <h4>本月热门</h4>
-          <ul>
-            <li />
-          </ul>
         </div>
       </section>
     </section>
@@ -132,8 +126,7 @@ export default {
   min-width:1000px;
   height:500px;
 }
-.d-content-left{width:770px}
-.d-content-right{width:200px}
+.d-content-left{width:100%}
 .title {
   font-family:
     'Quicksand',
@@ -151,7 +144,6 @@ export default {
   color: #35495e;
   letter-spacing: 1px;
 }
-
 .subtitle {
   font-weight: 300;
   font-size: 42px;

@@ -220,7 +220,32 @@ function addArticle (req, res) {
 
 // 更新文章
 function updateArticle (req, res) {
-
+  const resObj = Common.clone(Constant.DEFAULT_SUCCESS('操作成功'));
+  const { title, content, cateId, aritcleId } = req.body;
+  const tasks = {
+    checkParams: (callback) => {
+      Common.checkParams(req.body, ['title', 'content', 'cateId', 'aritcleId'], callback);
+    },
+    query: ['checkParams', (result, callback) => {
+      ArticleModel.update({
+        title,
+        content,
+        cate: cateId,
+        updated_at: Math.round(new Date() / 1000)
+      }, {
+        where: {
+          id: aritcleId
+        }
+      }).then(res => {
+        if (res[0]) {
+          callback(null)
+        }
+      }).catch(error => {
+        callback(Constant.DEFAULT_ERROR(error));
+      })
+    }]
+  }
+  Common.autoFn(tasks, res, resObj);
 }
 
 // 获取文章详情

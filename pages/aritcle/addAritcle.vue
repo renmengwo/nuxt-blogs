@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mt20">
     <i-col :span="12" class-name="clearfix">
       <i-col :span="6" class-name="set-title">
         请输入文章标题
@@ -30,7 +30,9 @@
       </client-only>
     </section>
     <section class="alignC mt20">
-      <i-button>取消</i-button>
+      <i-button type="info" @click="Goback">
+        取消
+      </i-button>
       <i-button type="primary" class="ml10" @click="Submite">
         提交
       </i-button>
@@ -92,15 +94,32 @@ export default {
       console.log('editor change!', editor, html, text)
       this.content = html
     }, */
+    Goback() {
+      this.$router.go('-1');
+    },
     async Submite () {
-      const body = {
-        title: this.title,
-        cateId: this.cateId,
-        content: this.content
-      }
-      const { data } = await addArticle(body)
-      if (data.status === 1) {
-        console.log(data);
+      if (this.title === '') {
+        this.$Message.error('标题不能为空');
+      } else if (this.cateId === '') {
+        this.$Message.error('类别不能为空');
+      } else if (this.content === '') {
+        this.$Message.error('内容不能为空');
+      } else {
+        const body = {
+          title: this.title,
+          cateId: this.cateId,
+          content: this.content
+        }
+        const { data } = await addArticle(body)
+        if (data.status === 1) {
+          this.$Message.success({
+            content: '添加成功！',
+            duration: 1,
+            onClose: () => {
+              this.$router.push('/')
+            }
+          });
+        }
       }
     }
   }

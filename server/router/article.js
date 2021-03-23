@@ -10,5 +10,6 @@ router.get('/getArticleList', ArticleModeRouter.getArticleList);
 router.get('/queryUserArticle', ArticleModeRouter.queryUserArticle);
 router.get('/queryArticleDetails', ArticleModeRouter.getArticleInfo);
 router.post('/addArticle', ArticleModeRouter.addArticle);
+router.post('/updateArticle', ArticleModeRouter.updateArticle);
 
 module.exports = router;
