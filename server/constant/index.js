@@ -25,6 +25,12 @@ const obj = {
       status: -1,
       msg: '用户名或者密码不对'
     };
+  },
+  TOKEN_ERROR () {
+    return {
+      status: -1,
+      msg: '用户未登录/Token验证失败'
+    };
   }
 };
 module.exports = obj;
