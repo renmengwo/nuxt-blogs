@@ -1,7 +1,7 @@
 <template>
   <Layout>
     <Header />
-    <div class="wrap">
+    <div class="wrap pb20">
       <Nuxt />
     </div>
     <Footer />

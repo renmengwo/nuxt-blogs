@@ -3,7 +3,9 @@
     <header class=" mb10 d-head">
       <section class="wrap d-flex d-head-center">
         <ul class="d-head-left d-flex">
-          <li>这是logo位置</li>
+          <li>
+            <img src="../static/images/logo1.jpg" alt="" width="40px">
+          </li>
           <li>
             <nuxt-link :to="{name:'UserCenter'}" class="handlecursor">
               个人中心
@@ -12,7 +14,9 @@
         </ul>
         <div class="d-flex d-head-right">
           <template v-if="!isLogin">
-            <p class="admin-img mr20" />
+            <p class="admin-img mr20">
+              <img src="../static/images/logo.jpg" alt="" width="100%">
+            </p>
             <p class="mr20">
               欢迎{{ UserName }}
             </p>
@@ -107,7 +111,7 @@ export default {
 
 <style scoped lang="scss">
 .d-head{border-bottom:1px solid #eaeaea;box-shadow: 0 5px 5px #f5f7f9; height:50px;flex-direction: row; justify-content: space-between;background: #fff;}
-.admin-img{width:30px; height:30px;background: #f5f7f9;border-radius: 100%;border: 1px solid #000}
+.admin-img{width:30px; height:30px;background: #f5f7f9;border-radius: 100%;border: 1px solid #000;overflow: hidden;}
 .d-head-left{
   li{margin-right:10px;cursor:pointer;line-height:50px;}
 }

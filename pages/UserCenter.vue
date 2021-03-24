@@ -5,7 +5,9 @@
     </section>
     <section>
       <div class="d-user-box">
-        <p class="d-user-img"></p>
+        <p class="d-user-img">
+          <img src="../static/images/logo.jpg" alt="" width="100%">
+        </p>
         <p class="d-user-name">
           {{ UserName }}
         </p>
@@ -13,7 +15,9 @@
     </section>
     <ArticleList :article-list="ArticleList" :is-person="isPerson" @handleSuccess="getUseList" />
     <template v-if="total">
-      <Page :total="total" :current="pageNumber" :page-size="20" @on-change="changePage" />
+      <div class="alignR">
+        <Page :total="total" :current="pageNumber" :page-size="20" @on-change="changePage" />
+      </div>
     </template>
   </div>
 </template>
@@ -79,7 +83,7 @@ export default {
   font-weight: 500;
   padding-left:10px;
 }
-.d-user-img{width:100px;height:100px;border-radius: 100%;border:1px solid #333;background:#fff;}
+.d-user-img{width:100px;height:100px;border-radius: 100%;border:1px solid #333;background:#fff;overflow: hidden;}
 .d-user-box{width:100px;height:130px;position: relative;
   top: -50px;
   left: 50%;

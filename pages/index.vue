@@ -42,7 +42,9 @@
         <div class="d-content-left">
           <ArticleList :article-list="ArticleList" />
           <template v-if="total">
-            <Page :total="total" :current="pageNumber" :page-size="20" @on-change="changePage" />
+            <div class="alignR">
+              <Page :total="total" :current="pageNumber" :page-size="20" @on-change="changePage" />
+            </div>
           </template>
         </div>
       </section>
@@ -66,7 +68,7 @@ export default {
       pageNumber: 1,
       catelist: [],
       ArticleList: [],
-      banners: [{ url:'../static/images/backimg.jpg' }, { url:'../static/images/backimg.jpg' }],
+      banners: [{ url:'../static/images/bjone.jpg' }, { url:'../static/images/backimg.jpg' }],
       swiperOption: {
         speed: 400,
         autoplay: true,
@@ -159,7 +161,7 @@ export default {
 }
 
 .my-swiper {
-  height: 300px;
+  height: 500px;
   width: 100%;
   .swiper-slide {
     text-align: center;
