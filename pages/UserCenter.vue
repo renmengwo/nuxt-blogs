@@ -11,6 +11,11 @@
         <p class="d-user-name">
           {{ UserName }}
         </p>
+        <p class="alignC" style="font-size:20px">
+          <nuxt-link :to="{name:'aritcle-addAritcle'}" class="handlecursor">
+            创建博客
+          </nuxt-link>
+        </p>
       </div>
     </section>
     <ArticleList :article-list="ArticleList" :is-person="isPerson" @handleSuccess="getUseList" />

@@ -38,6 +38,7 @@
     "vue-quill-editor": "^3.0.6"
   },
   "devDependencies": {
+    "@nuxt/types": "^2.14.12",
     "@nuxtjs/eslint-config": "^5.0.0",
     "@nuxtjs/eslint-module": "^3.0.2",
     "babel-eslint": "^10.1.0",
