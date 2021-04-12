@@ -97,9 +97,13 @@ export default {
         this.catelist = data.value
       }
     },
-    changePage (val) {
-      this.pageNumber = 1;
-      this.pageNumber = val
+    async changePage (val) {
+      this.pageNumber = val;
+      const { data } = await getArticleList(this.doseach())
+      if (data.status === 1) {
+        this.ArticleList = data.value.list
+        this.total = data.value.count
+      }
     },
     async getInitData () {
       this.pageNumber = 1;
@@ -113,7 +117,8 @@ export default {
       return {
         title: this.title,
         pageNumber: this.pageNumber,
-        cate: this.cate
+        cate: this.cate,
+        pageSize: 20
       }
     }
   }

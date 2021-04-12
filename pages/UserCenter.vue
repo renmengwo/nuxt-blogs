@@ -55,7 +55,8 @@ export default {
     doseach () {
       return {
         title: this.title,
-        pageNumber: this.pageNumber
+        pageNumber: this.pageNumber,
+        pageSize: 20
       }
     },
     async getUseList() {
@@ -66,9 +67,14 @@ export default {
         this.total = data.value.count
       }
     },
-    changePage (val) {
+    async changePage (val) {
       this.pageNumber = 1;
-      this.pageNumber = val
+      this.pageNumber = val;
+      const { data } = await getUseArticleList(this.doseach());
+      if (data.status === 1) {
+        this.ArticleList = data.value.list
+        this.total = data.value.count
+      }
     }
   }
 }
