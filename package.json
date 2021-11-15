@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=dev nodemon  server.js --exec babel-node",
+    "dev": "cross-env NODE_ENV=dev nodemon  server.js",
     "build": "nuxt build",
     "start": "cross-env NODE_ENV=production nodemon server.js",
     "generate": "nuxt generate",
