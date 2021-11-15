@@ -1,7 +1,7 @@
 <template>
   <div>
     <List item-layout="vertical">
-      <ListItem v-for="item in ArticleList" :key="item.id">
+      <ListItem v-for="item in articleList" :key="item.id">
         <ListItemMeta>
           <template slot="title">
             <nuxt-link :to="{name:'aritcle-id',params:{id:item.id}}" class="handlecursor">
@@ -10,7 +10,7 @@
           </template>
         </ListItemMeta>
         <p class="title-item">
-          {{item.content}}
+          {{ item.content }}
         </p>
         <template slot="action">
           <li>
@@ -43,7 +43,7 @@ import { setDisabledArticle } from '@/api/article'
 export default {
   name: 'ArticleList',
   props: {
-    ArticleList: {
+    articleList: {
       type: Array,
       default: () => []
     },
